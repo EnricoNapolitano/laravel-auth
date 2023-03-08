@@ -17,18 +17,22 @@
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
+
+    @yield('cdns')
 </head>
 
 <body>
     <div id="app">
-
 
         @include('includes.navbar')
 
         <main class="">
             @yield('content')
         </main>
+        
     </div>
+
+    @yield('scripts')
 </body>
 
 </html>
