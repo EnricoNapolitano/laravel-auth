@@ -16,7 +16,9 @@
                 <td>{{ $project->title }}</td>
                 <td>{{ $project->created_at }}</td>
                 <td>{{ $project->updated_at }}</td>
-                <td></td>
+                <td>
+                    <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
+                </td>
             </tr>
             @empty
             <tr>
