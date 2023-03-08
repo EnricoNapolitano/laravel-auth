@@ -2,7 +2,7 @@
 @section('content')
 <div class="container mt-5">
     <figure class="text-center">
-        <img src="{{ $project->image }}" alt="$project->title">
+        <img src="{{ $project->image }}" alt="{{ $project->title }}">
     </figure>
     <div class="paragraph">
         <h1 class="mt-4 mb-3">{{ $project->title }}</h1>
