@@ -6,6 +6,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
 {
@@ -32,7 +33,18 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //to do: validation
+        $request->validate([
+            'title' => 'required|string|unique:projects|min:5|max:50',
+            'content' => 'required|string',
+            'image' => 'nullable|url',
+        ], [
+            'title.required' => 'Title is required',
+            'title.unique' => 'This title has alreay been taken',
+            'title.min' => 'Title has has to be minimun 5 letters',
+            'title.max' => 'Title has has to be maximum 50 letters',
+            'content.required' => 'Content can\' t be empty',
+            'image.url0' => 'Image needs a valid url',
+        ]);
 
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
@@ -64,7 +76,18 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //to do: validation
+        $request->validate([
+            'title' => ['required','string',Rule::unique('projects')->ignore($project->id),'min:5','max:50'],
+            'content' => 'required|string',
+            'image' => 'nullable|url',
+        ], [
+            'title.required' => 'Title is required',
+            'title.unique' => 'This title has alreay been taken',
+            'title.min' => 'Title has has to be minimun 5 letters',
+            'title.max' => 'Title has has to be maximum 50 letters',
+            'content.required' => 'Content can\' t be empty',
+            'image.url0' => 'Image needs a valid url',
+        ]);
 
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
