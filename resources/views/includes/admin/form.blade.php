@@ -6,7 +6,7 @@
     <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" novalidate>
     @method('PUT')
     @else
-    <form action="{{ route('admin.projects.store') }}" method="POST" novalidate>
+    <form action="{{ route('admin.projects.store') }}" method="POST">
     @endif
     @csrf
         <div class="mb-3">
