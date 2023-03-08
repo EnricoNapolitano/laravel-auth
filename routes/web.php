@@ -33,7 +33,7 @@ Route::middleware('auth')->prefix('/admin')->name('admin.')->group(function (){
     Route::delete('/Projects/{project}', [ProjectController::class, 'destroy'])->('projects.destroy'); */
 
     // Code below groups all the CRUD's routes
-    Route::resource('posts', ProjectController::class);
+    Route::resource('projects', ProjectController::class);
 });
 
 Route::middleware('auth')->group(function () {
