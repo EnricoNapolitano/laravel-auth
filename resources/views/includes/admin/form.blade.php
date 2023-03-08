@@ -19,7 +19,7 @@
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">Project Content</label>
-            <textarea class="form-control" id="content" rows="3" name="content" placeholder="Describe your project..." value="{{ old('content', $project->content) }}"  required></textarea>
+            <textarea class="form-control" id="content" rows="3" name="content" placeholder="Describe your project..." required> {{ old('content', $project->content) }} </textarea>
         </div>
             <button type="submit" class="btn btn-primary"><i class="fa-solid fa-upload me-2"></i>{{ $project->exists ? 'Update' : 'Upload'}}</button>
     </form>
