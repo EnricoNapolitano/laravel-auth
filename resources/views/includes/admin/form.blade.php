@@ -19,7 +19,16 @@
             <label for="content" class="form-label">Project Content</label>
             <textarea class="form-control" id="content" rows="3" name="content" placeholder="Describe your project..." value="{{ old('content',$project->content) }}"  required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-upload me-2"></i>{{ $project->exists ? 'Update' : 'Upload'}}</button>
+        <div class="d-flex">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-upload me-2"></i>{{ $project->exists ? 'Update' : 'Upload'}}</button>
+            @if($project->exists)
+            <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" class="container">
+            @csrf
+            @method('DELETE')
+                <button class="btn btn-warning ms-2">Delete</button>
+            </form>
+            @endif
+        </div>
     </form>
 
 </main>
