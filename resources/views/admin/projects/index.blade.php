@@ -18,6 +18,7 @@
                     <td>{{ $project->updated_at }}</td>
                     <td>
                         <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
+                        <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
                     </td>
                 </tr>
                 @empty
