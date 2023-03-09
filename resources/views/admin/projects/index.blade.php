@@ -5,20 +5,20 @@
             <thead>
                 <th>#id</th>
                 <th>Title</th>
-                <th>Created at</th>
-                <th>Updated at</th>
-                <th>Actions</th>
+                <th class="text-center">Created at</th>
+                <th class="text-center">Updated at</th>
+                <th class="text-end">Actions</th>
             </thead>
             <tbody>
                 @forelse($projects as $project)
                 <tr>
                     <td>{{ $project->id }}</td>
                     <td>{{ $project->title }}</td>
-                    <td>{{ $project->created_at }}</td>
-                    <td>{{ $project->updated_at }}</td>
-                    <td>
-                        <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
-                        <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
+                    <td class="text-center">{{ $project->created_at }}</td>
+                    <td class="text-center">{{ $project->updated_at }}</td>
+                    <td class="text-end">
+                        <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-eye"></i></a>
+                        <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pencil"></i></a>
                     </td>
                 </tr>
                 @empty
@@ -28,7 +28,7 @@
                 @endforelse
             </tbody>
         </table>
-        <a href="{{ route('admin.projects.create') }}" class="btn btn-primary"><i class="fa-solid fa-upload me-2"></i>Upload Project</a>
+        <a href="{{ route('admin.projects.create') }}" class="btn btn-outline-primary"><i class="fa-solid fa-upload me-2"></i>Upload Project</a>
     </div>
 
 
