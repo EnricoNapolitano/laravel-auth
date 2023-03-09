@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -36,21 +37,28 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|string|unique:projects|min:5|max:50',
             'content' => 'required|string',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
         ], [
             'title.required' => 'Title is required',
             'title.unique' => 'This title has alreay been taken',
             'title.min' => 'Title has has to be minimun 5 letters',
             'title.max' => 'Title has has to be maximum 50 letters',
             'content.required' => 'Content can\'t be empty',
-            'image.url' => 'Image needs a valid url',
+            'image.image' => 'Files need to be an image',
+            'image.mimes' => 'Accepted extensions are: jpg, jpeg, png',
         ]);
 
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
         
         $project = new Project();
-        $project->fill($data)->save();
+        
+        $project->fill($data);
+        
+        // Storing image and creating its path
+        if ($request->hasFile('image')) $project->image = Storage::put('upload', $data['image']);
+
+        $project->save();
 
         return to_route('admin.projects.show', $project->id);
     }
@@ -79,20 +87,28 @@ class ProjectController extends Controller
         $request->validate([
             'title' => ['required','string',Rule::unique('projects')->ignore($project->id),'min:5','max:50'],
             'content' => 'required|string',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
         ], [
             'title.required' => 'Title is required',
             'title.unique' => 'This title has alreay been taken',
             'title.min' => 'Title has has to be minimun 5 letters',
             'title.max' => 'Title has has to be maximum 50 letters',
-            'content.required' => 'Content can\' t be empty',
-            'image.url0' => 'Image needs a valid url',
+            'content.required' => 'Content can\'t be empty',
+            'image.image' => 'Files need to be an image',
+            'image.mimes' => 'Accepted extensions are: jpg, jpeg, png',
         ]);
-
+        
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
         
-        $project->fill($data)->save();
+        $project->fill($data);
+        
+        if ($request->hasFile('image')){
+            if($project->image) Storage::delete($project->image);
+            $project->image = Storage::put('upload', $data['image']);
+        } 
+        
+        $project->save();
 
         return to_route('admin.projects.show', $project->id);
     }
@@ -102,6 +118,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+
+        if($project->image) Storage::delete($project->image);
+
         $project->delete();
         return to_route('admin.projects.index');
     }
