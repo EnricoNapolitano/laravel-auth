@@ -6,10 +6,10 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
-          <a class="nav-link @if (Route::is('admin.home')) active @endif" aria-current="page" href="{{ route('admin.home') }}">Home</a>
+          <a class="nav-link @if (Route::is('admin.home')) text-primary active @endif" aria-current="page" href="{{ route('admin.home') }}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link @if (Route::is('admin.projects.index')) active @endif" href="{{ route('admin.projects.index') }}">Projects</a>
+          <a class="nav-link @if (Route::is('admin.projects.index')) text-primary active @endif" href="{{ route('admin.projects.index') }}">Projects</a>
         </li>                      
       </ul>
     </div>
