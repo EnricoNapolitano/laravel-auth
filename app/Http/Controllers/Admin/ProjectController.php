@@ -42,8 +42,8 @@ class ProjectController extends Controller
             'title.unique' => 'This title has alreay been taken',
             'title.min' => 'Title has has to be minimun 5 letters',
             'title.max' => 'Title has has to be maximum 50 letters',
-            'content.required' => 'Content can\' t be empty',
-            'image.url0' => 'Image needs a valid url',
+            'content.required' => 'Content can\'t be empty',
+            'image.url' => 'Image needs a valid url',
         ]);
 
         $data = $request->all();
