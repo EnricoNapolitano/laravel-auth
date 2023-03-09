@@ -3,10 +3,10 @@
     @include('includes.alerts.error')
 
     @if($project->exists)
-    <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" novalidate>
+    <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data" novalidate>
     @method('PUT')
     @else
-    <form action="{{ route('admin.projects.store') }}" method="POST">
+    <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data" novalidate>
     @endif
     @csrf
         <div class="mb-3">
@@ -14,8 +14,8 @@
             <input type="text" class="form-control" id="title" placeholder="Write a title for your project" name="title" value="{{ old('title', $project->title) }}" minlength="5" maxlength="50" required>
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Project Image Url</label>
-            <input type="url" class="form-control" id="image" placeholder="Insert url image..." name="image" value="{{ old('image', $project->image) }}" required>
+            <label for="image" class="form-label">Project Image</label>
+            <input type="file" class="form-control" id="image" name="image" required>
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">Project Content</label>
